@@ -58,6 +58,12 @@ getResponse = requests.get(URL2, headers=getHeader, verify=False)
 
 devicesJSON = getResponse.json()
 
+device = devicesJSON['response'][2]
+#deviceName = device['hostname']
+#deviceIP = device['managementIpAddress']
+
+#print("Device Named " + deviceName + "is at IP " + deviceIP
+
 #prints devicesJSON to the screen
 
 pprint(devicesJSON)
