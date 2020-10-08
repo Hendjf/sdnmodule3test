@@ -8,6 +8,7 @@ and retrieves a list of network devices
 
 import requests
 from requests.auth import HTTPBasicAuth
+from pprint import pprint
 
 #Defines global variables we don't want changed
 
@@ -59,4 +60,4 @@ devicesJSON = getResponse.json()
 
 #prints devicesJSON to the screen
 
-print(devicesJSON)
+pprint(devicesJSON)
