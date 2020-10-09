@@ -8,12 +8,15 @@ and retrieves a list of network devices
 
 import requests
 from requests.auth import HTTPBasicAuth
-from pprint import pprint
+#from pprint import pprint
+import getpass
 
 #Defines global variables we don't want changed
 
-USER = "devnetuser"
-PASS = "Cisco123!"
+#USER = "devnetuser"
+USER = input("Please Enter Your Username: ")
+#PASS = "Cisco123!"
+PASS = getpass.getpass()
 URL = "https://sandboxdnac.cisco.com/api/system/v1/auth/token"
 
 
@@ -37,7 +40,7 @@ token = response.json()['Token']
 
 #prints responseJSON variable
 
-print("Your generated token is: " + token)
+#print("Your generated token is: " + token)
 
 #Creates a variable URL2 and assigns the value of the follow up API request
 #to DNA Center to retrieve a list of network devices
@@ -58,12 +61,20 @@ getResponse = requests.get(URL2, headers=getHeader, verify=False)
 
 devicesJSON = getResponse.json()
 
-device = devicesJSON['response'][2]
+devices =getResponse.json()['response']
+for device in devices:
+	name = device['hostname']
+	mgmtIP = device['managementIpAddress']
+	print("The Device Named: " + str(name) + " is at IP " + str(mgmtIP))
+
+#device = devicesJSON['response']
 #deviceName = device['hostname']
 #deviceIP = device['managementIpAddress']
 
-#print("Device Named " + deviceName + "is at IP " + deviceIP
+#print("Device Named " + deviceName + "is at IP " + deviceIP)
 
 #prints devicesJSON to the screen
 
-pprint(devicesJSON)
+#pprint(devicesJSON)
+
+
